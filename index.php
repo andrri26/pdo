@@ -1,16 +1,46 @@
 <?php
 
-require_once "Database.php";
-require_once "SakafoRepository.php";
-require_once "Sakafo.php";
+   if( isset($_GET['controller']) ){
 
-$db = new Database();
+        // get controller name and route name
 
-$sakafoRepository = new SakafoRepository($db);
+        $controller = $_GET['controller'];
 
-$s1 = new Sakafo();
-$s1->setNom('jeroma');
+        if(isset($_GET['route'])){
+            $route = $_GET['route'];
+        }else{
+            $route = "index";
+        }
 
-$sakafoRepository->ajouterSakafo($s1);
+        // create and transform controller name
 
-var_dump($sakafoRepository->findAll());
+        $controllerClassName = ucfirst($controller) . 'Controller' ;
+
+
+        $controllerfile = $controllerClassName . ".php";
+
+        if(file_exists($controllerfile)){
+            
+            // load controller from path or file
+            
+            require_once $controllerfile;
+
+            // create new instance of the controller
+
+            $controller = new $controllerClassName();
+
+            // call route function
+
+            try {
+                $controller->$route();
+            } catch (\Throwable $th) {
+                echo "no route found 404";
+            }
+
+        }else{
+            echo "no controller found 404";
+        }
+
+   }else{
+       echo "aucun page d'accueil";
+   }
