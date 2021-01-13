@@ -22,7 +22,7 @@
         if(file_exists($controllerfile)){
             
             // load controller from path or file
-            
+
             require_once $controllerfile;
 
             // create new instance of the controller
@@ -34,6 +34,7 @@
             try {
                 $controller->$route();
             } catch (\Throwable $th) {
+                // echo $th->getMessage();
                 echo "no route found 404";
             }
 

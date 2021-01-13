@@ -1,5 +1,6 @@
 <?php
 require_once "Sakafo.php";
+require_once "DatabaseManager.php";
 
 class SakafoRepository
 {
@@ -7,9 +8,10 @@ class SakafoRepository
 
     private $db;
 
-    public function __construct($database)
+    public function __construct()
     {
-        $this->db = $database->getConnexion();
+        $databaseManager = new DatabaseManager();
+        $this->db = $databaseManager->getConnexion();
     }
 
     public function findAll()

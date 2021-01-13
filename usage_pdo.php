@@ -1,12 +1,10 @@
 <?php
 
-require_once "Database.php";
+
 require_once "SakafoRepository.php";
 require_once "Sakafo.php";
 
-$db = new Database();
-
-$sakafoRepository = new SakafoRepository($db);
+$sakafoRepository = new SakafoRepository();
 
 $s1 = new Sakafo();
 $s1->setNom('jeroma');

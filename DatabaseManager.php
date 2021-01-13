@@ -1,6 +1,6 @@
 <?php
 
-class Database
+class DatabaseManager
 {
     const DB_HOST = "localhost";
     const DB_PORT = "3308";
